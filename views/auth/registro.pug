@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  h2 Registro
+  if error
+    .alert.alert-danger= error
+  form(method="POST", action="/registro")
+    .mb-3
+      label.form-label Nome
+      input.form-control(type="text", name="nome", required)
+    .mb-3
+      label.form-label Email
+      input.form-control(type="email", name="email", required)
+    .mb-3
+      label.form-label Senha
+      input.form-control(type="password", name="senha", required)
+    .mb-3
+      label.form-label Perfil
+      select.form-select(name="perfil", required)
+        option(value="vendedor") Vendedor
+        option(value="admin") Administrador
+    button.btn.btn-success(type="submit") Registrar

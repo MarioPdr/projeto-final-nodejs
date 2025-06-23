@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1 Dashboard
+  p Bem-vindo(a), #{user.nome}
+
+  ul
+    li: a(href="/vendas") Registrar Venda
+    if user.perfil === 'admin'
+      li: a(href="/produtos/cadastrar") Cadastro de Produto
+    li: a(href="/logout") Sair

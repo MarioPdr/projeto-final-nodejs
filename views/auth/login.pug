@@ -1,0 +1,17 @@
+extends ../layout.pug
+
+block content
+  h1 Login
+  if registered
+    p.text-success Cadastro realizado com sucesso. Faça login.
+  if error
+    p.text-danger= error
+
+  form(action="/login" method="post")
+    div.form-group
+      label(for="email") Email
+      input#email.form-control(type="email" name="email" required)
+    div.form-group
+      label(for="senha") Senha
+      input#senha.form-control(type="password" name="senha" required)
+    button.btn.btn-primary(type="submit") Entrar

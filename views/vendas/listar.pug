@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+  h2 Vendas Realizadas
+
+  table.table.table-bordered
+    thead
+      tr
+        th ID
+        th Vendedor
+        th Data
+        th Total
+    tbody
+      each venda in vendas
+        tr
+          td= venda.id
+          td= venda.vendedor
+          td= new Date(venda.data).toLocaleString("pt-BR")
+          td R$ #{venda.total.toFixed(2)}

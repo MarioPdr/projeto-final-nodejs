@@ -1,0 +1,64 @@
+extends ../layout
+
+block content
+  h2 Registrar Venda
+  if error
+    .alert.alert-danger= error
+
+  form#form-venda(method="POST" action="/vendas" onsubmit="return enviarVenda()")
+    table.table
+      thead
+        tr
+          th Produto
+          th Preço
+          th Estoque
+          th Quantidade
+      tbody
+        each produto in produtos
+          tr
+            td= produto.nome
+            td R$ #{produto.preco.toFixed(2)}
+            td= produto.estoque
+            td
+              input.form-control(
+                type="number",
+                min="0",
+                max=produto.estoque,
+                name=`quantidade_${produto.id}`,
+                value="0"
+              )
+    button.btn.btn-success(type="submit") Confirmar Venda
+
+  script.
+    function enviarVenda() {
+      const rows = document.querySelectorAll('tbody tr');
+      const produtos = [];
+
+      rows.forEach(row => {
+        const input = row.querySelector('input');
+        const id = input.name.split('_')[1];
+        const quantidade = parseInt(input.value);
+        if (quantidade > 0) {
+          produtos.push({ id: parseInt(id), quantidade });
+        }
+      });
+
+      if (produtos.length === 0) {
+        alert('Selecione pelo menos um produto');
+        return false;
+      }
+
+      const form = document.getElementById('form-venda');
+
+      // Remove input antigo se existir
+      const oldInput = form.querySelector('input[name="produtos"]');
+      if (oldInput) form.removeChild(oldInput);
+
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'produtos';
+      input.value = JSON.stringify(produtos);
+      form.appendChild(input);
+
+      return true;
+    }

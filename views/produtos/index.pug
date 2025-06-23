@@ -1,0 +1,28 @@
+extends ../layout
+
+block content
+  h2 Produtos Cadastrados
+
+  if user && user.perfil === 'admin'
+    a.btn.btn-primary.mb-3(href="/produtos/cadastrar") Novo Produto
+
+  table.table.table-striped
+    thead
+      tr
+        th ID
+        th Nome
+        th Preço
+        th Estoque
+        th Imagem
+    tbody
+      each produto in produtos
+        tr
+          td= produto.id
+          td= produto.nome
+          td R$ #{produto.preco.toFixed(2)}
+          td= produto.estoque
+          td
+            if produto.imagem
+              img(src=`/uploads/${produto.imagem}`, width="80")
+            else
+              | -
