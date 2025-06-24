@@ -1,4 +1,4 @@
-const db = require('../models/db');
+const db = require('../config/db');
 const bcrypt = require('bcrypt');
 
 exports.showLogin = (req, res) => {
