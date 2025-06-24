@@ -6,6 +6,9 @@ block content
 
   ul
     li: a(href="/vendas") Registrar Venda
+    li: a(href="/vendas/listar") Consultar Vendas
     if user.perfil === 'admin'
       li: a(href="/produtos/cadastrar") Cadastro de Produto
+      li: a(href="/produtos") Listar Produtos
+      li: a(href="/vendas/listar") Consultar Vendas
     li: a(href="/logout") Sair
